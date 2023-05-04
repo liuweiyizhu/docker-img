@@ -1,0 +1,20 @@
+FROM liuyiwei/jdk
+
+RUN set -eux; \
+        apk update -X http://mirrors.aliyun.com/alpine/v3.12/main; \
+        apk add wget vim git tar unzip tzdata --no-cache -X http://mirrors.aliyun.com/alpine/v3.12/main
+
+ADD ./apache-maven-3.8.8-bin.tar.gz /opt
+
+ENV MAVEN_HOME=/opt/apache-maven-3.8.8
+ENV PATH=$MAVEN_HOME/bin:$PATH
+ENV export $PATH
+
+RUN set -eux; \
+        ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime; \
+        echo "Asia/Shanghai" > /etc/timezone; \
+        mvn -v
+
+WORKDIR /home
+
+CMD ["sh"]
