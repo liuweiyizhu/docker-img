@@ -1,4 +1,5 @@
 FROM liuyiwei/jdk
+LABEL maintainer="liuyiwei"
 
 RUN set -eux; \
         apk update -X http://mirrors.aliyun.com/alpine/v3.12/main; \
